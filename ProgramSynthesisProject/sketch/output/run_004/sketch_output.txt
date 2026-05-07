@@ -1,0 +1,45 @@
+SKETCH version 1.7.6
+Benchmark = sketch/manual/policy.sk
+/* BEGIN PACKAGE ANONYMOUS*/
+/*policy.sk:11*/
+
+void _main ()/*policy.sk:11*/
+{
+  int _out_s1 = 0;
+  policy(80, _out_s1);
+  assert (_out_s1 == 1); //Assert at policy.sk:12 (0)
+  int _out_s3 = 0;
+  policy(4444, _out_s3);
+  assert (_out_s3 == 0); //Assert at policy.sk:13 (0)
+  int _out_s5 = 0;
+  policy(22, _out_s5);
+  assert (_out_s5 == 0); //Assert at policy.sk:14 (0)
+  int _out_s7 = 0;
+  policy(443, _out_s7);
+  assert (_out_s7 == 0); //Assert at policy.sk:15 (0)
+}
+/*policy.sk:11*/
+
+void main__Wrapper ()  implements main__WrapperNospec/*policy.sk:11*/
+{
+  _main();
+}
+/*policy.sk:11*/
+
+void main__WrapperNospec ()/*policy.sk:11*/
+{ }
+/*policy.sk:4*/
+
+void policy (int port, ref int _out)/*policy.sk:4*/
+{
+  if(port == 80)/*policy.sk:7*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = 0;
+  return;
+}
+/* END PACKAGE ANONYMOUS*/
+[SKETCH] DONE
+Total time = 800

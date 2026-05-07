@@ -1,0 +1,16 @@
+int ALLOW = 1;
+int DENY = 0;
+
+int policy(int port) {
+    int allowed_port = ??(16);
+
+    if (port == allowed_port) return ALLOW;
+    return DENY;
+}
+
+harness void main() {
+assert policy(80) == ALLOW;
+assert policy(4444) == DENY;
+assert policy(22) == DENY;
+assert policy(443) == DENY;
+}

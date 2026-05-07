@@ -1,0 +1,107 @@
+SKETCH version 1.7.6
+Benchmark = sketch/manual/range_policy.sk
+/* BEGIN PACKAGE ANONYMOUS*/
+/*range_policy.sk:14*/
+
+void _main ()/*range_policy.sk:14*/
+{
+  int _out_s1 = 0;
+  policy(443, _out_s1);
+  assert (_out_s1 == 0); //Assert at range_policy.sk:15 (0)
+  int _out_s3 = 0;
+  policy(80, _out_s3);
+  assert (_out_s3 == 1); //Assert at range_policy.sk:16 (0)
+  int _out_s5 = 0;
+  policy(8017, _out_s5);
+  assert (_out_s5 == 1); //Assert at range_policy.sk:17 (0)
+  int _out_s7 = 0;
+  policy(8018, _out_s7);
+  assert (_out_s7 == 1); //Assert at range_policy.sk:18 (0)
+  int _out_s9 = 0;
+  policy(8014, _out_s9);
+  assert (_out_s9 == 1); //Assert at range_policy.sk:19 (0)
+  int _out_s11 = 0;
+  policy(8011, _out_s11);
+  assert (_out_s11 == 1); //Assert at range_policy.sk:20 (0)
+  int _out_s13 = 0;
+  policy(8003, _out_s13);
+  assert (_out_s13 == 0); //Assert at range_policy.sk:21 (0)
+  int _out_s15 = 0;
+  policy(8012, _out_s15);
+  assert (_out_s15 == 1); //Assert at range_policy.sk:22 (0)
+  int _out_s17 = 0;
+  policy(8004, _out_s17);
+  assert (_out_s17 == 0); //Assert at range_policy.sk:23 (0)
+  int _out_s19 = 0;
+  policy(8008, _out_s19);
+  assert (_out_s19 == 0); //Assert at range_policy.sk:24 (0)
+  int _out_s21 = 0;
+  policy(8005, _out_s21);
+  assert (_out_s21 == 0); //Assert at range_policy.sk:25 (0)
+  int _out_s23 = 0;
+  policy(8001, _out_s23);
+  assert (_out_s23 == 0); //Assert at range_policy.sk:26 (0)
+  int _out_s25 = 0;
+  policy(8020, _out_s25);
+  assert (_out_s25 == 0); //Assert at range_policy.sk:27 (0)
+  int _out_s27 = 0;
+  policy(8002, _out_s27);
+  assert (_out_s27 == 0); //Assert at range_policy.sk:28 (0)
+  int _out_s29 = 0;
+  policy(8007, _out_s29);
+  assert (_out_s29 == 0); //Assert at range_policy.sk:29 (0)
+  int _out_s31 = 0;
+  policy(8015, _out_s31);
+  assert (_out_s31 == 1); //Assert at range_policy.sk:30 (0)
+  int _out_s33 = 0;
+  policy(8019, _out_s33);
+  assert (_out_s33 == 1); //Assert at range_policy.sk:31 (0)
+  int _out_s35 = 0;
+  policy(8009, _out_s35);
+  assert (_out_s35 == 0); //Assert at range_policy.sk:32 (0)
+  int _out_s37 = 0;
+  policy(8016, _out_s37);
+  assert (_out_s37 == 1); //Assert at range_policy.sk:33 (0)
+  int _out_s39 = 0;
+  policy(8013, _out_s39);
+  assert (_out_s39 == 1); //Assert at range_policy.sk:34 (0)
+  int _out_s41 = 0;
+  policy(8000, _out_s41);
+  assert (_out_s41 == 0); //Assert at range_policy.sk:35 (0)
+  int _out_s43 = 0;
+  policy(8006, _out_s43);
+  assert (_out_s43 == 0); //Assert at range_policy.sk:36 (0)
+  int _out_s45 = 0;
+  policy(8010, _out_s45);
+  assert (_out_s45 == 0); //Assert at range_policy.sk:37 (0)
+}
+/*range_policy.sk:14*/
+
+void main__Wrapper ()  implements main__WrapperNospec/*range_policy.sk:14*/
+{
+  _main();
+}
+/*range_policy.sk:14*/
+
+void main__WrapperNospec ()/*range_policy.sk:14*/
+{ }
+/*range_policy.sk:4*/
+
+void policy (int port, ref int _out)/*range_policy.sk:4*/
+{
+  if(port == 80)/*range_policy.sk:9*/
+  {
+    _out = 1;
+    return;
+  }
+  if((8011 <= port) && (port <= 8019))/*range_policy.sk:10*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = 0;
+  return;
+}
+/* END PACKAGE ANONYMOUS*/
+[SKETCH] DONE
+Total time = 1500

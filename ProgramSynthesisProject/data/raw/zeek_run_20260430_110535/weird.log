@@ -1,0 +1,3 @@
+{"ts":1777565168.770649,"uid":"CclZzA1e3DIb0iTy8b","id.orig_h":"192.168.56.101","id.orig_p":57356,"id.resp_h":"192.168.56.104","id.resp_p":22,"name":"SSH_version_mismatch","addl":"SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.15 vs SSH-1.5-NmapNSE_1.0","notice":false,"peer":"zeek"}
+{"ts":1777565168.770649,"uid":"CL5WlV60Y25MBdBd3","id.orig_h":"192.168.56.101","id.orig_p":57358,"id.resp_h":"192.168.56.104","id.resp_p":22,"name":"SSH_version_mismatch","addl":"SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.15 vs SSH-1.5-Nmap-SSH1-Hostkey","notice":false,"peer":"zeek"}
+{"ts":1777565168.826084,"uid":"CsWkhJ2rWBv6aeuok2","id.orig_h":"192.168.56.101","id.orig_p":42486,"id.resp_h":"192.168.56.104","id.resp_p":80,"name":"unknown_HTTP_method","addl":"OWWY","notice":false,"peer":"zeek"}

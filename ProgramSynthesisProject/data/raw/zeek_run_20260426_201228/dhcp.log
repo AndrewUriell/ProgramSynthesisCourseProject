@@ -1,0 +1,2 @@
+{"ts":1777252369.460618,"uids":["CCoVNj4IC6amNhEtsl"],"client_addr":"192.168.56.104","server_addr":"192.168.56.100","mac":"08:00:27:d6:80:de","host_name":"server-VirtualBox","assigned_addr":"192.168.56.104","lease_time":600.0,"msg_types":["REQUEST","ACK"],"duration":0.04183006286621094}
+{"ts":1777252669.465511,"uids":["COppUN2GDlG0GGS8db"],"client_addr":"192.168.56.104","server_addr":"192.168.56.100","mac":"08:00:27:d6:80:de","host_name":"server-VirtualBox","assigned_addr":"192.168.56.104","lease_time":600.0,"msg_types":["REQUEST","ACK"],"duration":0.046411991119384766}

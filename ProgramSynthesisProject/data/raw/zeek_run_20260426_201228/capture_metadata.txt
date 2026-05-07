@@ -1,0 +1,4 @@
+timestamp=20260426_201228
+interface=enp0s3
+host=server-VirtualBox
+user=server

@@ -1,0 +1,6 @@
+{
+  "allowed_ports": [
+    80
+  ],
+  "default": "deny"
+}
