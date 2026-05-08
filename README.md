@@ -47,6 +47,7 @@ ProgramSynthesisProject/
     generated/
       apply_ufw.sh                  Generated ufw policy application script
 
+  trafficGen.sh                     Runs traffic tests from Kali to Ubuntu
   traffic_commands.txt              Example commands for generating traffic
   sketch_assertions.txt             Generated assertions from policy_examples.csv
 ```
@@ -63,12 +64,19 @@ but this pipeline only consumes `conn.log`.
 - Sketch installed at `$HOME/sketch-1.7.6/sketch-frontend/sketch`
 - `ufw`, only if applying the generated firewall script
 - `sudo` privileges for Zeek capture and for applying `ufw` rules
+- A Kali VM for generating traffic toward the Ubuntu VM
+- Traffic generation tools on Kali: `ping`, `nc`, `dig`, `curl`, and `nmap`
 
 Run the pipeline commands from the `ProgramSynthesisProject` directory:
 
 ```bash
 cd ProgramSynthesisProject
 ```
+
+In the test setup, the Kali VM acts as the traffic generator and sends packets
+to the Ubuntu VM. The Ubuntu VM acts as the target machine: it runs Zeek,
+processes the logs, runs Sketch, generates the `ufw` rules, and applies the
+final firewall policy.
 
 ## Pipeline Walkthrough
 
@@ -96,9 +104,42 @@ This creates a directory like `data/raw/zeek_run_20260430_110535/`. Press
 `Ctrl+C` to stop the live capture. The most important output for the next stage
 is `conn.log`.
 
-Traffic examples for producing test connections are in `traffic_commands.txt`.
+Keep this Zeek capture running on the Ubuntu VM while traffic is generated from
+the Kali VM.
 
-### 2. Build Policy Examples
+### 2. Generate Traffic From Kali
+
+File: `trafficGen.sh`
+
+What it does: runs the traffic-generation commands from the Kali VM against the
+Ubuntu VM target. The script currently targets `192.168.56.104`, which is the
+Ubuntu VM in the test setup.
+
+Command format:
+
+```bash
+./trafficGen.sh
+```
+
+Example:
+
+```bash
+./trafficGen.sh
+```
+
+The script runs a ping test, checks SSH on port `22`, queries DNS with `dig`,
+requests HTTP headers with `curl`, tests TCP port `4444`, tests UDP port `9999`,
+and runs an Nmap scan. These commands create the traffic that Zeek records in
+the Ubuntu VM's `conn.log`.
+
+If the Ubuntu VM has a different IP address, update the `TARGET` value in
+`trafficGen.sh` before running the script. Individual traffic examples are also
+listed in `traffic_commands.txt`.
+
+After the traffic generation finishes, stop the Zeek capture on Ubuntu with
+`Ctrl+C`.
+
+### 3. Build Policy Examples
 
 File: `scripts/run_build_policy_csv.sh`
 
@@ -130,7 +171,7 @@ The wrapper currently maps `192.168.56.103` to `attacker`, maps
 `192.168.56.104` to `web_server`, allows TCP port `80`, and denies other TCP
 ports.
 
-### 3. Generate Sketch Assertions
+### 4. Generate Sketch Assertions
 
 File: `scripts/create_assertions.py`
 
@@ -151,7 +192,7 @@ python3 scripts/create_assertions.py
 
 This script uses relative paths, so run it from `ProgramSynthesisProject`.
 
-### 4. Run Sketch
+### 5. Run Sketch
 
 File: `scripts/run_sketch.sh`
 
@@ -179,7 +220,7 @@ Example using the range template:
 The main output for the next stage is
 `sketch/output/<run>/sketch_output.txt`.
 
-### 5. Parse the Synthesized Policy
+### 6. Parse the Synthesized Policy
 
 File: `scripts/run_parse_sketch_output.sh`
 
@@ -210,7 +251,7 @@ Example JSON output:
 }
 ```
 
-### 6. Generate `ufw` Rules
+### 7. Generate `ufw` Rules
 
 File: `scripts/run_build_ufw_rules.sh`
 
@@ -236,7 +277,7 @@ The generated script resets `ufw`, sets the default incoming policy, allows
 outgoing traffic, adds one TCP allow rule for each synthesized allowed port, and
 prints the final verbose firewall status.
 
-### 7. Apply the Generated Firewall Policy
+### 8. Apply the Generated Firewall Policy
 
 File: `firewall/generated/apply_ufw.sh`
 
@@ -259,6 +300,8 @@ run it on a machine where changing firewall rules is intended.
 
 ## Important Files
 
+- `trafficGen.sh`: helper script run from the Kali VM to generate traffic
+  toward the Ubuntu VM.
 - `traffic_commands.txt`: example commands for creating traffic that Zeek can
   observe.
 - `data/processed/policy_examples.csv`: reduced policy dataset consumed by the
